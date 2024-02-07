@@ -14,14 +14,13 @@ if(MSVC)
     endif()
 endif()
 
-add_library(binary_tree SHARED "class/binary_search_tree.cc")
-target_include_directories(binary_tree PUBLIC "bin_tree")
+add_library(Library "class/tree.cc")
+target_include_directories(Library PUBLIC "Binary_Tree")
 
 include(FetchContent)
 FetchContent_Declare(googletest URL https://github.com/google/googletest/archive/6b63c98ac43efc992122f1da12aaf0a0e0658206.zip)
-
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_executable(tests "tests/tree_tests.cc")
-target_link_libraries(tests bin_tree GTest::gtest_main)
+add_executable(Tests "tests/tree_tests.cc")
+target_link_libraries(Tests Library GTest::gtest_main)
