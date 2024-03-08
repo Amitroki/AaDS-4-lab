@@ -22,5 +22,5 @@ FetchContent_Declare(googletest URL https://github.com/google/googletest/archive
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_executable(Tests "tests/tree_tests.cc")
-target_link_libraries(Tests Library GTest::gtest_main)
+add_executable(tests "tests/tree_tests.cc")
+target_link_libraries(tests Library GTest::gtest_main)

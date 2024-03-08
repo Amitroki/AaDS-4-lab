@@ -5,10 +5,9 @@ using namespace tree;
 using namespace std;
 
 TEST(TreeNodeTests, Print) {
-	treeNode test1(1);
-	treeNode test2(4);
-	treeNode a(2, test1, test2);
-	treeNode b(4);
-	treeNode c(10, a, b);
-	c.print();
+	RBTreeNode* test1 = new RBTreeNode(1);
+	RBTreeNode* test2 = new RBTreeNode(4);
+	RBTreeNode* test_res = new RBTreeNode(2, test1, test2);
+	Set a(test_res);
+	a.print();
 }
