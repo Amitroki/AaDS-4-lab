@@ -17,75 +17,72 @@ namespace tree {
 
 	class Set {
 	private:
+
 		RBTreeNode* _root;
-		void print_with_recursion_algorithm(RBTreeNode* node) {
+		
+		RBTreeNode* copying(RBTreeNode* root) {
+			if (root) {
+				RBTreeNode* copied_el = new RBTreeNode(root->_value);
+				copied_el->_left = copying(root->_left);
+				copied_el->_right = copying(root->_right);
+				return copied_el;
+			}
+			return nullptr;
+		}
+
+		void deletion(RBTreeNode* root) {
+			if (root) {
+				deletion(root->_left);
+				deletion(root->_right);
+				delete root;
+			}
+			return;
+		}
+
+		void print(RBTreeNode* node) {
 			if (!node) {
 				return;
 			}
-			print_with_recursion_algorithm(node->_left);
+			print(node->_left);
 			cout << node->_value << " ";
-			print_with_recursion_algorithm(node->_right);
+			print(node->_right);
 		}
+
 	public:
+
 		Set() {
-			RBTreeNode* left = new RBTreeNode(-1);
-			RBTreeNode* right = new RBTreeNode(1);
-			_root = new RBTreeNode(0, left, right);
+			_root = nullptr;
 		}
+
 		Set(int value) {
 			_root = new RBTreeNode(value);
 		}
+
 		Set(RBTreeNode* node) {
 			_root = new RBTreeNode(node->_value, node->_left, node->_right);
 		}
-		void print_with_recursion_algorithm() {
-			RBTreeNode* node = _root;
 
+		Set(const Set& other) {
+			_root = copying(other._root);
 		}
-		void print() {
+
+		Set& operator=(const Set& other) {
+			if (this != &other) {
+				deletion(_root);
+				_root = copying(other._root);
+			}
+			return *this;
+		}
+
+		void print_with_recursion() {
 			if (_root) {
-				print_with_recursion_algorithm(_root);
+				print(_root);
 			}
 			cout << endl;
 		}
-		/*void print_without_recursion_algorithm() {
 
-			RBTreeNode* processing_node = _root;
-			bool indicator_of_reaching_the_leftmost_node = false;
-			vector<int> printable_result = {};
-
-			while (processing_node) {
-
-				if (!indicator_of_reaching_the_leftmost_node) {
-					while (processing_node->_left) {
-						processing_node->_parent = processing_node;
-						processing_node = processing_node->_left;
-					}
-				}
-
-				printable_result.push_back(processing_node->_value);
-				indicator_of_reaching_the_leftmost_node = true;
-
-				if (processing_node->_right) {
-					indicator_of_reaching_the_leftmost_node = false;
-					printable_result.push_back(processing_node->_right->_value);
-				}
-
-				else if (processing_node->_parent) {
-					while (processing_node->_parent && processing_node == processing_node->_parent->_right)
-						processing_node = processing_node->_parent;
-					if (!processing_node->_parent)
-						break;
-					processing_node = processing_node->_parent;
-				}
-
-				else break;
-			}
-
-			for (int i = 0; i < printable_result.size(); i++) {
-				cout << printable_result[i];
-			}
-			return;
-		}*/
+		~Set() {
+			deletion(_root);
+		}
 	};
 }
