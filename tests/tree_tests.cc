@@ -41,3 +41,27 @@ TEST(CreatedSet, CopyConstructor) {
 	Set b(a);
 	b.print_with_recursion();
 }
+TEST(CreatedSet, InsertElement1) {
+	RBTreeNode* test1 = new RBTreeNode(1);
+	RBTreeNode* test2 = new RBTreeNode(4);
+	RBTreeNode* test_res = new RBTreeNode(2, test1, test2);
+	Set a(test_res);
+	a.insert(5);
+	a.print_with_recursion();
+}
+TEST(CreatedSet, InsertElement2) {
+	RBTreeNode* test1 = new RBTreeNode(1);
+	RBTreeNode* test2 = new RBTreeNode(4);
+	RBTreeNode* test_res = new RBTreeNode(2, test1, test2);
+	Set a(test_res);
+	a.insert(3);
+	a.print_with_recursion();
+}
+TEST(CreatedSet, InsertElement3) {
+	RBTreeNode* test1 = new RBTreeNode(1);
+	RBTreeNode* test2 = new RBTreeNode(4);
+	RBTreeNode* test_res = new RBTreeNode(2, test1, test2);
+	Set a(test_res);
+	a.insert(0);
+	a.print_with_recursion();
+}

@@ -30,6 +30,16 @@ namespace tree {
 			return nullptr;
 		}
 
+		bool adding_element(RBTreeNode* &root, int val) {
+			if (!root) {
+				root = new RBTreeNode(val);
+				return true;
+			}
+			if (val < root->_value) return adding_element(root->_left, val);
+			else if (val > root->_value) return adding_element(root->_right, val);
+			return false;
+		}
+
 		void deletion(RBTreeNode* root) {
 			if (root) {
 				deletion(root->_left);
@@ -72,6 +82,10 @@ namespace tree {
 				_root = copying(other._root);
 			}
 			return *this;
+		}
+
+		bool insert(int value) {
+			return adding_element(_root, value);
 		}
 
 		void print_with_recursion() {
