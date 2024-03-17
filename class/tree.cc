@@ -7,10 +7,12 @@ using namespace std;
 namespace tree {
 
 	struct RBTreeNode {
+
 		int _value;
 		RBTreeNode* _left;
 		RBTreeNode* _right;
 		RBTreeNode* _parent;
+
 		RBTreeNode(int number) : _value(number), _left(nullptr), _right(nullptr), _parent(nullptr) {}
 		RBTreeNode(int number, RBTreeNode* ref1, RBTreeNode* ref2) : _value(number), _left(ref1), _right(ref2), _parent(nullptr) {}
 	};
@@ -38,6 +40,15 @@ namespace tree {
 			if (val < root->_value) return adding_element(root->_left, val);
 			else if (val > root->_value) return adding_element(root->_right, val);
 			return false;
+		}
+
+		bool element_presence(RBTreeNode*& root, int val) {
+			if (!root) {
+				return false;
+			}
+			if (val < root->_value) return element_presence(root->_left, val);
+			else if (val > root->_value) return element_presence(root->_right, val);
+			else if (val == root->_value) return true;
 		}
 
 		void deletion(RBTreeNode* root) {
@@ -82,6 +93,10 @@ namespace tree {
 				_root = copying(other._root);
 			}
 			return *this;
+		}
+
+		bool contain(int value) {
+			return element_presence(_root, value);
 		}
 
 		bool insert(int value) {

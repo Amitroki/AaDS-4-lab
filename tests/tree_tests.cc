@@ -65,3 +65,25 @@ TEST(CreatedSet, InsertElement3) {
 	a.insert(0);
 	a.print_with_recursion();
 }
+TEST(CreatedSet, ContainElement) {
+	RBTreeNode* test1 = new RBTreeNode(1);
+	RBTreeNode* test2 = new RBTreeNode(4);
+	RBTreeNode* test_res = new RBTreeNode(2, test1, test2);
+	Set a(test_res);
+	a.insert(0);
+	if (a.contain(0)) {
+		cout << "this set contain 0." << endl;
+	}
+	else cout << "this set is not contain 0." << endl;
+}
+TEST(CreatedSet, NotContainElement) {
+	RBTreeNode* test1 = new RBTreeNode(1);
+	RBTreeNode* test2 = new RBTreeNode(4);
+	RBTreeNode* test_res = new RBTreeNode(2, test1, test2);
+	Set a(test_res);
+	a.insert(0);
+	if (a.contain(5)) {
+		cout << "this set contain 5." << endl;
+	}
+	else cout << "this set is not contain 5." << endl;
+}
