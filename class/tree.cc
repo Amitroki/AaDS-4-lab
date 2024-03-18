@@ -15,6 +15,7 @@ namespace tree {
 
 		RBTreeNode(int number) : _value(number), _left(nullptr), _right(nullptr), _parent(nullptr) {}
 		RBTreeNode(int number, RBTreeNode* ref1, RBTreeNode* ref2) : _value(number), _left(ref1), _right(ref2), _parent(nullptr) {}
+
 	};
 
 	class Set {
@@ -48,7 +49,36 @@ namespace tree {
 			}
 			if (val < root->_value) return element_presence(root->_left, val);
 			else if (val > root->_value) return element_presence(root->_right, val);
-			else if (val == root->_value) return true;
+			return true;
+		}
+
+		bool delete_element(RBTreeNode*& root, int val) {
+			if (!root) {
+				return false;
+			}
+			if (val < root->_value) return delete_element(root->_left, val);
+			else if (val > root->_value) return delete_element(root->_right, val);
+			else {
+				if (!root->_left) {
+					RBTreeNode* node = root->_right;
+					delete root;
+					root = node;
+				}
+				else if (!root->_right) {
+					RBTreeNode* node = root->_left;
+					delete root;
+					root = node;
+				}
+				else {
+					RBTreeNode* node = root->_left;
+					while (node->_right) {
+						node = node->_right;
+					}
+					root->_value = node->_value;
+					delete_element(root->_left, node->_value);
+				}
+				return true;
+			}
 		}
 
 		void deletion(RBTreeNode* root) {
@@ -95,6 +125,14 @@ namespace tree {
 			return *this;
 		}
 
+		RBTreeNode* get_root() const {
+			return _root;
+		}
+
+		bool erase(int value) {
+			return delete_element(_root, value);
+		}
+
 		bool contain(int value) {
 			return element_presence(_root, value);
 		}
@@ -113,5 +151,6 @@ namespace tree {
 		~Set() {
 			deletion(_root);
 		}
+
 	};
 }

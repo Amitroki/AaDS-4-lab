@@ -87,3 +87,15 @@ TEST(CreatedSet, NotContainElement) {
 	}
 	else cout << "this set is not contain 5." << endl;
 }
+TEST(CreatedSet, EraseElement) {
+	Set a(1);
+	a.insert(0);
+	a.insert(5);
+	a.insert(3);
+	a.insert(2);
+	a.insert(4);
+	a.insert(6);
+	a.print_with_recursion();
+	a.erase(5);
+	a.print_with_recursion();
+}
