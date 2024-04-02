@@ -4,6 +4,7 @@
 #include <complex>
 #include <algorithm>
 #include <chrono>
+#include <random>
 
 using namespace std;
 
@@ -205,6 +206,14 @@ namespace tree {
 		return x;
 	}
 
+	int random(int a, int b) {
+		std::random_device random_device;
+		std::mt19937 generator(random_device());
+		std::uniform_int_distribution<> distribution(a, b);
+		int res = distribution(generator);
+		return res;
+	}
+
 	uint64_t time_now() {
 		using namespace std::chrono;
 		return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
@@ -217,7 +226,7 @@ namespace tree {
 			int current_count_of_elements = 0;
 			uint64_t begin = time_now();
 			while (current_count_of_elements != numbers_for_filling) {
-				if (new_set.insert(lcg())) {
+				if (new_set.insert(random(-15 * numbers_for_filling, 15 * numbers_for_filling))) {
 					current_count_of_elements++;
 				}
 			}
@@ -234,8 +243,48 @@ namespace tree {
 			int current_count_of_elements = 0; 
 			uint64_t begin = time_now();
 			while (current_count_of_elements != numbers_for_filling) {
-				new_vector.push_back(lcg());
+				new_vector.push_back(random(-15 * numbers_for_filling, 15 * numbers_for_filling));
 				current_count_of_elements++;
+			}
+			uint64_t end = time_now();
+			res += (end - begin);
+		}
+		return res / attempts;
+	}
+
+	double set_contain_element_time(int numbers_for_filling, int attempts) {
+		double res = 0;
+		for (int attempt = 0; attempt < attempts; attempt++) {
+			Set<int> new_set;
+			int current_count_of_elements = 0;
+			while (current_count_of_elements != numbers_for_filling) {
+				if (new_set.insert(random(-15 * numbers_for_filling, 15 * numbers_for_filling))) {
+					current_count_of_elements++;
+				}
+			}
+			uint64_t begin = time_now();
+			new_set.contain(random(-5 * numbers_for_filling, 5 * numbers_for_filling));
+			uint64_t end = time_now();
+			res += (end - begin);
+		}
+		return res / attempts;
+	}
+
+	double vector_contain_element_time(int numbers_for_filling, int attempts) {
+		double res = 0;
+		for (int attempt = 0; attempt < attempts; attempt++) {
+			vector<int> new_vector;
+			int current_count_of_elements = 0;
+			while (current_count_of_elements != numbers_for_filling) {
+				new_vector.push_back(random(-15 * numbers_for_filling, 15 * numbers_for_filling));
+				current_count_of_elements++;
+			}
+			uint64_t begin = time_now();
+			size_t element = random(-5 * numbers_for_filling, 5 * numbers_for_filling);
+			for (int i = 0; i < new_vector.size(); i++) {
+				if (new_vector[i] == element) {
+					break;
+				}
 			}
 			uint64_t end = time_now();
 			res += (end - begin);

@@ -147,3 +147,7 @@ TEST(ComparisonOfVectorAndSet, FillTime) {
 	cout << "Vector time: " << vector_fill_time(1000, 100) << endl;
 	cout << "Set time: " << set_fill_time(1000, 100) << endl;
 }
+TEST(ComparisonOfVectorAndSet, ContainTime) {
+	cout << "Vector time: " << vector_contain_element_time(1000, 1000) << endl;
+	cout << "Set time: " << set_contain_element_time(1000, 1000) << endl;
+}
