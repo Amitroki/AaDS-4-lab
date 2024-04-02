@@ -3,6 +3,7 @@
 #include <vector>
 #include <complex>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
 
@@ -179,7 +180,7 @@ namespace tree {
 	}*/
 
 	template <typename T>
-	vector<T> getUniqueElements(const vector<T>& vec) {
+	vector<T> get_unique_elements(const vector<T>& vec) {
 		Set<T> before_processing(vec);
 		vector<T> after_processing = {};
 		size_t sas = get_number_of_elements(before_processing.get_root());
@@ -196,5 +197,49 @@ namespace tree {
 			before_processing.erase(before_processing.get_root()->_value);
 		}
 		return after_processing;
+	}
+
+	size_t lcg() {
+		static size_t x = 0;
+		x = (1021 * x + 24631) % 116640;
+		return x;
+	}
+
+	uint64_t time_now() {
+		using namespace std::chrono;
+		return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+	}
+
+	double set_fill_time(int numbers_for_filling, int attempts) {
+		double res = 0;
+		for (int attempt = 0; attempt < attempts; attempt++) {
+			Set<int> new_set;
+			int current_count_of_elements = 0;
+			uint64_t begin = time_now();
+			while (current_count_of_elements != numbers_for_filling) {
+				if (new_set.insert(lcg())) {
+					current_count_of_elements++;
+				}
+			}
+			uint64_t end = time_now();
+			res += (end - begin);
+		}
+		return res / attempts;
+	}
+
+	double vector_fill_time(int numbers_for_filling, int attempts) {
+		double res = 0;
+		for (int attempt = 0; attempt < attempts; attempt++) {
+			vector<int> new_vector;
+			int current_count_of_elements = 0; 
+			uint64_t begin = time_now();
+			while (current_count_of_elements != numbers_for_filling) {
+				new_vector.push_back(lcg());
+				current_count_of_elements++;
+			}
+			uint64_t end = time_now();
+			res += (end - begin);
+		}
+		return res / attempts;
 	}
 }

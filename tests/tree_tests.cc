@@ -133,10 +133,17 @@ TEST(CreatedSet, NumberOfElements4) {
 }
 TEST(Task, RemoveDuplicateItems) {
 	vector<int> a{ 3, 3, 2, 2, 4, 4, 5, 5, 6, 6 };
-	vector<int> result = getUniqueElements(a);
+	vector<int> result = get_unique_elements(a);
 	cout << "Size of resulting array: " << result.size() << endl << "Elements of resulting array: ";
 	for (int i = 0; i < result.size(); i++) {
 		cout << result[i] << " ";
 	}
 	cout << endl;
+}
+TEST(Generator, FunctionGenerator1) {
+	cout << lcg() << " " << lcg() << " " << lcg() << endl;
+}
+TEST(ComparisonOfVectorAndSet, FillTime) {
+	cout << "Vector time: " << vector_fill_time(1000, 100) << endl;
+	cout << "Set time: " << set_fill_time(1000, 100) << endl;
 }
