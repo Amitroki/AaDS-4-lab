@@ -291,4 +291,39 @@ namespace tree {
 		}
 		return res / attempts;
 	}
+
+	double set_insert_element_time(int numbers_for_filling, int attempts) {
+		double res = 0;
+		for (int attempt = 0; attempt < attempts; attempt++) {
+			Set<int> new_set;
+			int current_count_of_elements = 0;
+			while (current_count_of_elements != numbers_for_filling) {
+				if (new_set.insert(random(-15 * numbers_for_filling, 15 * numbers_for_filling))) {
+					current_count_of_elements++;
+				}
+			}
+			uint64_t begin = time_now();
+			new_set.insert(random(-5 * numbers_for_filling, 5 * numbers_for_filling));
+			uint64_t end = time_now();
+			res += (end - begin);
+		}
+		return res / attempts;
+	}
+
+	double vector_insert_element_time(int numbers_for_filling, int attempts) {
+		double res = 0;
+		for (int attempt = 0; attempt < attempts; attempt++) {
+			vector<int> new_vector;
+			int current_count_of_elements = 0;
+			while (current_count_of_elements != numbers_for_filling) {
+				new_vector.push_back(random(-15 * numbers_for_filling, 15 * numbers_for_filling));
+				current_count_of_elements++;
+			}
+			uint64_t begin = time_now();
+			new_vector.push_back(random(-5 * numbers_for_filling, 5 * numbers_for_filling));
+			uint64_t end = time_now();
+			res += (end - begin);
+		}
+		return res / attempts;
+	}
 }
