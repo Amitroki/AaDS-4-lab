@@ -170,22 +170,15 @@ namespace tree {
 	template<typename T>
 	size_t get_number_of_elements(const RBTreeNode<T>* node) {
 		if (!node) return 0;
-		return get_number_of_elements(node->_left) +get_number_of_elements(node->_right) + 1;
+		return get_number_of_elements(node->_left) + get_number_of_elements(node->_right) + 1;
 	}
-
-	/*bool operator<(const string& lhs, const string& rhs) {
-		return lhs.compare(rhs) < 0;
-	}
-	bool operator>(const string& lhs, const string& rhs) {
-		return lhs.compare(rhs) > 0;
-	}*/
 
 	template <typename T>
 	vector<T> get_unique_elements(const vector<T>& vec) {
 		Set<T> before_processing(vec);
 		vector<T> after_processing = {};
-		size_t sas = get_number_of_elements(before_processing.get_root());
-		for (int j = 0; j < sas; j++) {
+		size_t size = get_number_of_elements(before_processing.get_root());
+		for (int j = 0; j < size; j++) {
 			int counter = 0;
 			for (int i = 0; i < vec.size(); i++) {
 				if (before_processing.get_root()->_value == vec[i]) {
@@ -226,7 +219,7 @@ namespace tree {
 			int current_count_of_elements = 0;
 			uint64_t begin = time_now();
 			while (current_count_of_elements != numbers_for_filling) {
-				if (new_set.insert(random(-15 * numbers_for_filling, 15 * numbers_for_filling))) {
+				if (new_set.insert(random(-3 * numbers_for_filling, 3 * numbers_for_filling))) { 
 					current_count_of_elements++;
 				}
 			}
@@ -243,7 +236,7 @@ namespace tree {
 			int current_count_of_elements = 0; 
 			uint64_t begin = time_now();
 			while (current_count_of_elements != numbers_for_filling) {
-				new_vector.push_back(random(-15 * numbers_for_filling, 15 * numbers_for_filling));
+				new_vector.push_back(random(-3 * numbers_for_filling, 3 * numbers_for_filling));
 				current_count_of_elements++;
 			}
 			uint64_t end = time_now();
@@ -258,12 +251,12 @@ namespace tree {
 			Set<int> new_set;
 			int current_count_of_elements = 0;
 			while (current_count_of_elements != numbers_for_filling) {
-				if (new_set.insert(random(-15 * numbers_for_filling, 15 * numbers_for_filling))) {
+				if (new_set.insert(random(-3 * numbers_for_filling, 3 * numbers_for_filling))) {
 					current_count_of_elements++;
 				}
 			}
 			uint64_t begin = time_now();
-			new_set.contain(random(-5 * numbers_for_filling, 5 * numbers_for_filling));
+			new_set.contain(random(-4 * numbers_for_filling, 4 * numbers_for_filling));
 			uint64_t end = time_now();
 			res += (end - begin);
 		}
@@ -276,11 +269,11 @@ namespace tree {
 			vector<int> new_vector;
 			int current_count_of_elements = 0;
 			while (current_count_of_elements != numbers_for_filling) {
-				new_vector.push_back(random(-15 * numbers_for_filling, 15 * numbers_for_filling));
+				new_vector.push_back(random(-3 * numbers_for_filling, 3 * numbers_for_filling));
 				current_count_of_elements++;
 			}
 			uint64_t begin = time_now();
-			size_t element = random(-5 * numbers_for_filling, 5 * numbers_for_filling);
+			size_t element = random(-4 * numbers_for_filling, 4 * numbers_for_filling);
 			for (int i = 0; i < new_vector.size(); i++) {
 				if (new_vector[i] == element) {
 					break;
@@ -298,12 +291,12 @@ namespace tree {
 			Set<int> new_set;
 			int current_count_of_elements = 0;
 			while (current_count_of_elements != numbers_for_filling) {
-				if (new_set.insert(random(-15 * numbers_for_filling, 15 * numbers_for_filling))) {
+				if (new_set.insert(random(-3 * numbers_for_filling, 3 * numbers_for_filling))) {
 					current_count_of_elements++;
 				}
 			}
 			uint64_t begin = time_now();
-			new_set.insert(random(-5 * numbers_for_filling, 5 * numbers_for_filling));
+			new_set.insert(random(-3 * numbers_for_filling, 3 * numbers_for_filling));
 			uint64_t end = time_now();
 			res += (end - begin);
 		}
@@ -316,11 +309,11 @@ namespace tree {
 			vector<int> new_vector;
 			int current_count_of_elements = 0;
 			while (current_count_of_elements != numbers_for_filling) {
-				new_vector.push_back(random(-15 * numbers_for_filling, 15 * numbers_for_filling));
+				new_vector.push_back(random(-3 * numbers_for_filling, 3 * numbers_for_filling));
 				current_count_of_elements++;
 			}
 			uint64_t begin = time_now();
-			new_vector.push_back(random(-5 * numbers_for_filling, 5 * numbers_for_filling));
+			new_vector.push_back(random(-3 * numbers_for_filling, 3 * numbers_for_filling));
 			uint64_t end = time_now();
 			res += (end - begin);
 		}
@@ -333,12 +326,12 @@ namespace tree {
 			Set<int> new_set;
 			int current_count_of_elements = 0;
 			while (current_count_of_elements != numbers_for_filling) {
-				if (new_set.insert(random(-15 * numbers_for_filling, 15 * numbers_for_filling))) {
+				if (new_set.insert(random(-3 * numbers_for_filling, 3 * numbers_for_filling))) {
 					current_count_of_elements++;
 				}
 			}
 			uint64_t begin = time_now();
-			new_set.erase(random(-5 * numbers_for_filling, 5 * numbers_for_filling));
+			new_set.erase(random(-2 * numbers_for_filling, 2 * numbers_for_filling));
 			uint64_t end = time_now();
 			res += (end - begin);
 		}
@@ -351,11 +344,11 @@ namespace tree {
 			vector<int> new_vector;
 			int current_count_of_elements = 0;
 			while (current_count_of_elements != numbers_for_filling) {
-				new_vector.push_back(random(-15 * numbers_for_filling, 15 * numbers_for_filling));
+				new_vector.push_back(random(-3 * numbers_for_filling, 3 * numbers_for_filling));
 				current_count_of_elements++;
 			}
 			uint64_t begin = time_now();
-			size_t element = random(-5 * numbers_for_filling, 5 * numbers_for_filling);
+			size_t element = random(-2 * numbers_for_filling, 2 * numbers_for_filling);
 			for (int i = 0; i < new_vector.size(); i++) {
 				if (new_vector[i] == element) {
 					new_vector.erase(new_vector.begin() + i);
