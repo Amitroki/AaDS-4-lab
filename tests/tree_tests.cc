@@ -80,7 +80,7 @@ TEST(CreatedSet, NotContainElement) {
 	}
 	else cout << "this set is not contain 5." << endl;
 }
-TEST(CreatedSet, EraseElement) {
+TEST(CreatedSet, EraseElement1) {
 	Set<int> a(1);
 	a.insert(0);
 	a.insert(5);
@@ -90,6 +90,19 @@ TEST(CreatedSet, EraseElement) {
 	a.insert(6);
 	a.print_with_recursion();
 	a.erase(5);
+	a.print_with_recursion();
+}
+TEST(CreatedSet, EraseElement2) {
+	Set<int> a(1);
+	a.insert(0);
+	a.insert(5);
+	a.insert(3);
+	a.print_with_recursion();
+	a.erase(5);
+	a.print_with_recursion();
+	a.erase(3);
+	a.print_with_recursion();
+	a.erase(0);
 	a.print_with_recursion();
 }
 TEST(CreatedSet, NumberOfElements1) {
@@ -132,7 +145,7 @@ TEST(CreatedSet, NumberOfElements4) {
 	cout << a.get_root()->_value;
 }
 TEST(Task, RemoveDuplicateItems) {
-	vector<int> a{ 3, 3, 2, 2, 4, 4, 5, 5, 6, 6 };
+	vector<int> a{ 3, 2, 2, 4, 5, 5, 6, 6, 7, 8, 8 };
 	vector<int> result = get_unique_elements(a);
 	cout << "Size of resulting array: " << result.size() << endl << "Elements of resulting array: ";
 	for (int i = 0; i < result.size(); i++) {

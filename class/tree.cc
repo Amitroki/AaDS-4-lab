@@ -75,6 +75,9 @@ namespace tree {
 					delete root;
 					root = node;
 				}
+				else if (!root->_right && !root->_left) {
+					delete root;
+				}
 				else {
 					RBTreeNode<T>* node = root->_left;
 					while (node->_right) {
